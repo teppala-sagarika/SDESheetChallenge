@@ -5,8 +5,9 @@
 // Language: cpp
 // Date    : 6/2/2026, 5:17:11 PM
 // ────────────────────────────────────────────────────────────
-// Time Complexity : O(??)
-// Space Complexity: O(??)
+// Time Complexity : O(n)
+// Space Complexity: O(1)
+// Notes           : arrays
 // ────────────────────────────────────────────────────────────
 
 class Solution {
