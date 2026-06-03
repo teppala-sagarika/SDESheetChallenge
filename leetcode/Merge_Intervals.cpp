@@ -1,11 +1,11 @@
 // ────────────────────────────────────────────────────────────
 // Problem : Merge Intervals
 // Platform: LeetCode
-// URL     : https://leetcode.com/problems/merge-intervals/submissions/2020906715/
+// URL     : https://leetcode.com/problems/merge-intervals/submissions/2020943093/
 // Language: cpp
-// Date    : 6/3/2026, 11:49:08 AM
+// Date    : 6/3/2026, 12:21:46 PM
 // ────────────────────────────────────────────────────────────
-// Time Complexity : O(n^2)
+// Time Complexity : O(n)
 // Space Complexity: O(n^2)
 // Notes           : Arrays 2
 // ────────────────────────────────────────────────────────────
@@ -16,18 +16,19 @@ public:
         sort(intervals.begin(),intervals.end());
         vector<vector<int>> ans;
         int n=intervals.size();
-        for(int i=0;i<n;i++){
-            int a=intervals[i][0],b=intervals[i][1];
-            for(int j=i+1;j<n;j++){
-                if(b>=intervals[j][0]){
-                    b=max(b,intervals[j][1]);
-                    i=j;
-                }
-                else{
-                    break;
-                }
+        int a=intervals[0][0],b=intervals[0][1];
+        ans.push_back({a,b});
+        for(int i=1;i<n;i++){
+            if(b>=intervals[i][0]){
+                ans.pop_back();
+                b=max(b,intervals[i][1]);
+                ans.push_back({a,b});
             }
-            ans.push_back({a,b});
+            else{
+                a=intervals[i][0];
+                b=intervals[i][1];
+                ans.push_back({a,b});
+            }
         }
         return ans;
     }
