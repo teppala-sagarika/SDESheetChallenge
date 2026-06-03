@@ -5,8 +5,8 @@
 // Language: cpp
 // Date    : 6/3/2026, 12:21:46 PM
 // ────────────────────────────────────────────────────────────
-// Time Complexity : O(n)
-// Space Complexity: O(n^2)
+// Time Complexity : O(n log n)
+// Space Complexity: O(n)
 // Notes           : Arrays 2
 // ────────────────────────────────────────────────────────────
 
