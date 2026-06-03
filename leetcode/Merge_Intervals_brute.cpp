@@ -21,5 +21,9 @@ public:
     }
 };
 
-//T.C = O(n^2)
-//S.C = O(n^2)
+//T.C
+//Sorting: O(n log n)
+//Merging: O(n)
+//Total T.C = O(n log n)
+
+//S.C = O(2n)= O(n)
