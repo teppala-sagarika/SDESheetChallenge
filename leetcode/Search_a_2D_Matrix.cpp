@@ -1,34 +1,35 @@
 // ────────────────────────────────────────────────────────────
 // Problem : Search a 2D Matrix
 // Platform: LeetCode
-// URL     : https://leetcode.com/problems/search-a-2d-matrix/submissions/2022941453/
+// URL     : https://leetcode.com/problems/search-a-2d-matrix/
 // Language: cpp
-// Date    : 6/5/2026, 11:29:01 AM
+// Date    : 6/5/2026, 2:29:41 PM
 // ────────────────────────────────────────────────────────────
-// Time Complexity : O(n+m)
+// Time Complexity : O(log nm)
 // Space Complexity: O(1)
-// Notes           : Arrays 3
+// Notes           : arrays 3 - binary search for 2D as 1D
 // ────────────────────────────────────────────────────────────
 
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
-        //start ptr with 1st row last col
-        //move ptr left if target is smaller 
-        //move ptr down if target is larger
-        //stop if out of bound = not found
+        //think 2D as 1D 
+        //row = idx / col len
+        //col = idx % col len
         int n=matrix.size();
         int m=matrix[0].size();
-        int i=0,j=m-1;
-        while(i<n && j>=0){
-            if(matrix[i][j]==target){
+        int l=0;
+        int h=(n*m)-1;
+        while(l<=h){
+            int mid=l+(h-l)/2;
+            if(matrix[mid/m][mid%m]==target){
                 return true;
             }
-            else if(matrix[i][j]>target){
-                j--;//left
+            else if(matrix[mid/m][mid%m]<target){
+                l=mid+1;
             }
             else{
-                i++;//down
+                h=mid-1;
             }
         }
         return false;
