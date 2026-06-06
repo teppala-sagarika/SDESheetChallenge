@@ -1,26 +1,27 @@
 // ────────────────────────────────────────────────────────────
 // Problem : Unique Paths
 // Platform: LeetCode
-// URL     : https://leetcode.com/problems/unique-paths/
+// URL     : https://leetcode.com/problems/unique-paths/submissions/2024256801/
 // Language: cpp
-// Date    : 6/6/2026, 12:50:40 PM
+// Date    : 6/6/2026, 6:53:44 PM
 // ────────────────────────────────────────────────────────────
-// Time Complexity : O(n)
-// Space Complexity: O(mxn)
-// Notes           : Space optimization
+// Time Complexity : O(min(m,n))
+// Space Complexity: O(1)
+// Notes           : Combinatorial method
 // ────────────────────────────────────────────────────────────
 
 class Solution {
 public:
     int uniquePaths(int m, int n) {
-        vector<vector<int>> dp(m+1,vector<int>(n+1,0));
-        dp[m-1][n-1]=1;
-        for(int i=m-1;i>=0;i--){
-            for(int j=n-1;j>=0;j--){
-                if(i==m-1 && j==n-1) continue;
-                dp[i][j]=dp[i+1][j]+dp[i][j+1];
-            }
+        int N = m + n - 2;      // total moves
+        int r = min(m - 1, n - 1);
+
+        long long ans = 1;
+
+        for (int i = 1; i <= r; i++) {
+            ans = ans * (N - r + i) / i;
         }
-        return dp[0][0];
+
+        return (int)ans;
     }
 };
