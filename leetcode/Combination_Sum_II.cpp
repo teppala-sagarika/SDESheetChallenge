@@ -5,7 +5,7 @@
 // Language: cpp
 // Date    : 6/17/2026, 9:12:57 PM
 // ────────────────────────────────────────────────────────────
-// Time Complexity : O(2^n)
+// Time Complexity : O(2^N * N)
 // Space Complexity: O(n)
 // Notes           : recursion
 // ────────────────────────────────────────────────────────────
