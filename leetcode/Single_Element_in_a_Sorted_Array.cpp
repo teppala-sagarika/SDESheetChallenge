@@ -1,23 +1,39 @@
 // ────────────────────────────────────────────────────────────
 // Problem : Single Element in a Sorted Array
 // Platform: LeetCode
-// URL     : https://leetcode.com/problems/single-element-in-a-sorted-array/submissions/2039782976/
+// URL     : https://leetcode.com/problems/single-element-in-a-sorted-array/
 // Language: cpp
-// Date    : 6/20/2026, 6:38:53 PM
+// Date    : 6/20/2026, 6:39:56 PM
 // ────────────────────────────────────────────────────────────
-// Time Complexity : O(n)
+// Time Complexity : O(log n)
 // Space Complexity: O(1)
-// Notes           : brute force (XOR)
+// Notes           : Optimal (binary search)
 // ────────────────────────────────────────────────────────────
 
 class Solution {
 public:
     int singleNonDuplicate(vector<int>& nums) {
         int n=nums.size();
-        int x=0;
-        for(int i=0;i<n;i++){
-            x^=nums[i];
+        if(n==1){
+            return nums[0];
         }
-        return x;
+        if(nums[0]!=nums[1]) return nums[0];
+        if(nums[n-1]!=nums[n-2]) return nums[n-1];
+        int l=1,h=n-2;
+        while(l<=h){
+            int m=(l+h)/2;
+            int left=nums[m-1];
+            int ryt=nums[m+1];
+            if(nums[m]!=left && nums[m]!=ryt){
+                return nums[m];
+            }
+            if(m%2==0 && nums[m]==nums[m-1] || m%2!=0 && nums[m]==nums[m+1]){
+                h=m-1;
+            }
+            else{
+                l=m+1;
+            }
+        }
+        return -1;
     }
 };
