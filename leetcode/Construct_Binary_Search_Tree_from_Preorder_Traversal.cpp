@@ -1,12 +1,13 @@
 // ────────────────────────────────────────────────────────────
 // Problem : Construct Binary Search Tree from Preorder Traversal
 // Platform: LeetCode
-// URL     : https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/description/
+// URL     : https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/submissions/2065245780/
 // Language: cpp
-// Date    : 7/12/2026, 10:03:32 PM
+// Date    : 7/12/2026, 10:33:33 PM
 // ────────────────────────────────────────────────────────────
-// Time Complexity : O(n log n)+O(n)
-// Space Complexity: O(n)
+// Time Complexity : O(3n)
+// Space Complexity: O(1)
+// Notes           : upper bound check for BST
 // ────────────────────────────────────────────────────────────
 
 /**
@@ -22,27 +23,19 @@
  */
 class Solution {
 public:
-    TreeNode* build(vector<int> &pre,int l,int h,unordered_map<int,int> &mp,int &preidx){
-        if(l>h){
+    TreeNode* build(vector<int>& preorder,int &i,int upr_bound){
+        if(i==preorder.size() || preorder[i]>upr_bound){
             return nullptr;
         }
-        int val=pre[preidx];
-        preidx++;
-        int idx=mp[val];
-        TreeNode* root=new TreeNode(val);
-        root->left=build(pre,l,idx-1,mp,preidx);
-        root->right=build(pre,idx+1,h,mp,preidx);
+        TreeNode* root=new TreeNode(preorder[i]);
+        i++;
+        root->left=build(preorder,i,root->val);
+        root->right=build(preorder,i,upr_bound);
         return root;
     }
     TreeNode* bstFromPreorder(vector<int>& preorder) {
-        vector<int> inorder=preorder;
-        sort(inorder.begin(),inorder.end());
-        int n=inorder.size();
-        unordered_map<int,int> mp;
-        for(int i=0;i<n;i++){
-            mp[inorder[i]]=i;
-        }
-        int pre=0;
-        return build(preorder,0,n-1,mp,pre);
+        //using upper bound only
+        int i=0;
+        return  build(preorder,i,INT_MAX);
     }
 };
