@@ -1,13 +1,12 @@
 // ────────────────────────────────────────────────────────────
 // Problem : Find Median from Data Stream
 // Platform: LeetCode
-// URL     : https://leetcode.com/problems/find-median-from-data-stream/
+// URL     : https://leetcode.com/problems/find-median-from-data-stream/submissions/2068696178/
 // Language: cpp
-// Date    : 6/23/2026, 9:25:38 AM
+// Date    : 7/15/2026, 7:39:55 PM
 // ────────────────────────────────────────────────────────────
-// Time Complexity : O(log n) addNum() , O(1) findMedian
-// Space Complexity: O(n)
-// Notes           : 2 HEAPS
+// Time Complexity : O(??)
+// Space Complexity: O(??)
 // ────────────────────────────────────────────────────────────
 
 class MedianFinder {
@@ -15,9 +14,7 @@ public:
 priority_queue<int> left_max_heap;
 priority_queue<int,vector<int>,greater<int>> ryt_min_heap;
     MedianFinder() {
-        
     }
-    
     void addNum(int num) {
         if(left_max_heap.empty()||num<left_max_heap.top()){
             left_max_heap.push(num);
