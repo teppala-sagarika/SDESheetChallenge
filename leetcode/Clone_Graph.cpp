@@ -1,13 +1,13 @@
 // ────────────────────────────────────────────────────────────
 // Problem : Clone Graph
 // Platform: LeetCode
-// URL     : https://leetcode.com/problems/clone-graph/submissions/2070175034/
+// URL     : https://leetcode.com/problems/clone-graph/submissions/2070185600/
 // Language: cpp
-// Date    : 7/16/2026, 10:27:25 PM
+// Date    : 7/16/2026, 10:34:33 PM
 // ────────────────────────────────────────────────────────────
 // Time Complexity : O(V + E)
 // Space Complexity: O(V + E)
-// Notes           : dfs
+// Notes           : bfs
 // ────────────────────────────────────────────────────────────
 
 /*
@@ -34,16 +34,23 @@ public:
 class Solution {
 public:
 unordered_map<Node*,Node*> mp;
-    void dfs(Node* node,Node* clone){
-        for(Node* n:node->neighbors){
-            if(mp.find(n)==mp.end()){
-                //not in map
-                Node* cloneNode=new Node(n->val);
-                mp[n]=cloneNode;
-                clone->neighbors.push_back(cloneNode);
-                dfs(n,cloneNode);
-            }else{
-                clone->neighbors.push_back(mp[n]);
+    void bfs(queue<Node*> q){
+        while(!q.empty()){
+            Node* node=q.front();
+            Node* cloneNode=mp[node];
+            q.pop();
+            for(Node* n:node->neighbors){
+                if(mp.find(n)==mp.end()){
+                    //not in map
+                    Node* clone=new Node(n->val);
+                    mp[n]=clone;
+                    cloneNode->neighbors.push_back(clone);
+
+                    q.push(n);
+                }
+                else{
+                    cloneNode->neighbors.push_back(mp[n]);
+                }
             }
         }
     }
@@ -54,7 +61,10 @@ unordered_map<Node*,Node*> mp;
         Node* clone=new Node(node->val);
         mp[node]=clone;
 
-        dfs(node,clone);
+        queue<Node*> q;
+        q.push(node);
+
+        bfs(q);
 
         return clone;
     }
